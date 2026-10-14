@@ -807,10 +807,9 @@
         }
     }
 
-    if (sessionStorage.getItem("putarMusik") === "true") {
-        sessionStorage.removeItem("putarMusik");
+       if (sessionStorage.getItem("putarMusik") === "true") {
         mulaiMusik();
-     }
+    }
 
     async function toggleMusik() {
         if (musik.paused) {
