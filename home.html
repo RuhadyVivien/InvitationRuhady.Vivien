@@ -14,11 +14,13 @@
 
 <body>
 
-    <audio id="musik" loop>
+    
+    <audio id="musik" loop preload="auto">
         <source src="musik.mp3" type="audio/mpeg">
-    </audio> 
+    </audio>
+    
+    <button id="tombolMusik" type="button" onclick="toggleMusik()">🔊</button>
 
-    <button id="tombolMusik" onclick="toggleMusik()">🔊</button>
     
     <section class="pembuka">
 
@@ -795,36 +797,35 @@
         try {
             await musik.play();
             sessionStorage.setItem("putarMusik", "true");
-
-            if (tombolMusik) {
-                tombolMusik.textContent = "🔊";
-            }
+            tombolMusik.textContent = "🔊";
         } catch (error) {
-            if (tombolMusik) {
-                tombolMusik.textContent = "🔇";
-            }
-            console.log("Safari memblokir autoplay musik.");
+            console.error("Musik gagal diputar:", error);
+            tombolMusik.textContent = "🔇";
         }
     }
 
-       if (sessionStorage.getItem("putarMusik") === "true") {
-        mulaiMusik();
-    }
-
-    async function toggleMusik() {
+    function toggleMusik() {
         if (musik.paused) {
-            await mulaiMusik();
+            mulaiMusik();
         } else {
             musik.pause();
             sessionStorage.setItem("putarMusik", "false");
-
-            if (tombolMusik) {
-                tombolMusik.textContent = "🔇";
-            }
+            tombolMusik.textContent = "🔇";
         }
     }
-</script>
 
+    musik.addEventListener("playing", () => {
+        tombolMusik.textContent = "🔊";
+    });
+
+    musik.addEventListener("pause", () => {
+        tombolMusik.textContent = "🔇";
+    });
+
+    if (sessionStorage.getItem("putarMusik") === "true") {
+        mulaiMusik();
+    }
+</script>
 
 <script>
     const tanggalAcara = new Date("December 6, 2026 10:00:00").getTime();
