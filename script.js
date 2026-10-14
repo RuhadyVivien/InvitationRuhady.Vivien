@@ -1,7 +1,6 @@
 
 function bukaUndangan() {
-    sessionStorage.setItem("putarMusik", "true");
-    window.location.href = "home.html";
+    window.location.href = "home.html" + window.location.search;
 }
 
 
