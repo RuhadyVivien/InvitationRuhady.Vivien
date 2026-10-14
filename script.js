@@ -1,7 +1,10 @@
 
+
 function bukaUndangan() {
+    sessionStorage.setItem("putarMusik", "true");
     window.location.href = "home.html" + window.location.search;
 }
+
 
 
 const parameterURL = new URLSearchParams(window.location.search);
